@@ -1,17 +1,7 @@
-import json
-
-
-def generate_diff(file1, file2):
-    with open(file1, 'r') as fp:
-        data1 = json.load(fp)
-
-    with open(file2, 'r') as fp:
-        data2 = json.load(fp)
-
-    sorted_data1 = dict(sorted(data1.items()))
-    sorted_data2 = dict(sorted(data2.items()))
+def generate_diff(data1, data2):
+    sorted_data1 = data1
+    sorted_data2 = data2
     container = []
-
     for key in sorted_data1:
         if key in sorted_data2 and sorted_data1[key] == sorted_data2[key]:
             container.append(f'    {key}: {sorted_data1[key]}')
