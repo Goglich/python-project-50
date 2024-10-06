@@ -13,8 +13,4 @@ def files_parser(file1, file2):
             data1 = yaml.safe_load(fp)
         with open(file2, 'r') as fp:
             data2 = yaml.safe_load(fp)
-
-    sorted_data1 = dict(sorted(data1.items()))
-    sorted_data2 = dict(sorted(data2.items()))
-
-    return sorted_data1, sorted_data2
+    return data1, data2

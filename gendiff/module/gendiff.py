@@ -1,20 +1,40 @@
 def generate_diff(data1, data2):
-    sorted_data1 = data1
-    sorted_data2 = data2
-    container = []
-    for key in sorted_data1:
-        if key in sorted_data2 and sorted_data1[key] == sorted_data2[key]:
-            container.append(f'    {key}: {sorted_data1[key]}')
-        elif key in sorted_data2 and sorted_data1[key] != sorted_data2[key]:
-            container.append(f'  - {key}: {sorted_data1[key]}')
-            container.append(f'  + {key}: {sorted_data2[key]}')
+    list_diff = []
+    set_keys = sorted(data1.keys() | data2.keys())
+    for key in set_keys:
+        if key not in data2:
+            list_diff.append({
+                "key": key,
+                "value": data1[key],
+                "type": 'removed',
+            })
+            continue
+        elif key not in data1:
+            list_diff.append({
+                "key": key,
+                "value": data2[key],
+                "type": 'added',
+            })
+            continue
+        elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
+            list_diff.append({
+                "key": key,
+                "value": generate_diff(data1[key], data2[key]),
+                "type": 'nested',
+            })
+            continue
+        elif data1[key] == data2[key]:
+            list_diff.append({
+                "key": key,
+                "value": data1[key],
+                "type": 'equal',
+            })
+            continue
         else:
-            container.append(f'  - {key}: {sorted_data1[key]}')
-    for key in sorted_data2:
-        if key in sorted_data2 and key not in sorted_data1:
-            container.append(f'  + {key}: {sorted_data2[key]}')
-
-    container.append('}')
-    container.insert(0, '{')
-    print('\n'.join(container))
-    return '\n'.join(container)
+            list_diff.append({
+                "key": key,
+                "value1": data1[key],
+                "value2": data2[key],
+                "type": 'updated',
+            })
+    return list_diff
