@@ -5,6 +5,4 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ac1d05116a57935b7b26/test_coverage)](https://codeclimate.com/github/Goglich/python-project-50/test_coverage)
 
-[![asciicast](https://asciinema.org/a/9DdLWFrPPE8KbrgmZVSFAGQwJ.svg)](https://asciinema.org/a/9DdLWFrPPE8KbrgmZVSFAGQwJ)
-
-[![asciicast](https://asciinema.org/a/OlwwUiLv2Aoa9voiUVM3S0JYF.svg)](https://asciinema.org/a/OlwwUiLv2Aoa9voiUVM3S0JYF)
+[![asciicast](https://asciinema.org/a/Qsu0yEopnlbeBiUFOL6D0HY00.svg)](https://asciinema.org/a/Qsu0yEopnlbeBiUFOL6D0HY00)

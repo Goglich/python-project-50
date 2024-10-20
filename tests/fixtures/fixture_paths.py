@@ -1,0 +1,6 @@
+FILE1_JSON = 'tests/fixtures/file1.json'
+FILE2_JSON = 'tests/fixtures/file2.json'
+FILE1_YAML = 'tests/fixtures/file1.yaml'
+FILE2_YAML = 'tests/fixtures/file2.yaml'
+FILE3_JSON = 'tests/fixtures/file3.json'
+FILE4_JSON = 'tests/fixtures/file4.json'

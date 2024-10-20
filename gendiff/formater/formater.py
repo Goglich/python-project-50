@@ -25,8 +25,8 @@ def make_stylish(value, replacer=' ', spaces_count=4):
                 elif i['type'] == 'equal':
                     lines.append(f"{left_shift}  {i['key']}: {to_str(i['value'], depth + DEPTH_STEP)}")
                 elif i['type'] == 'updated':
-                        lines.append(f"{left_shift}- {i['key']}: {to_str(i['value1'], depth + DEPTH_STEP)}")
-                        lines.append(f"{left_shift}+ {i['key']}: {to_str(i['value2'], depth + DEPTH_STEP)}")
+                    lines.append(f"{left_shift}- {i['key']}: {to_str(i['value1'], depth + DEPTH_STEP)}")
+                    lines.append(f"{left_shift}+ {i['key']}: {to_str(i['value2'], depth + DEPTH_STEP)}")
         result = itertools.chain("{", lines, [current_indent + "}"])
         return '\n'.join(result)
 
