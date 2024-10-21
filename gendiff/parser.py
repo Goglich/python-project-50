@@ -13,4 +13,11 @@ def files_parser(file1, file2):
             data1 = yaml.safe_load(fp)
         with open(file2, 'r') as fp:
             data2 = yaml.safe_load(fp)
+    elif file1.endswith('.yml') and file2.endswith('.yml'):
+        with open(file1, 'r') as fp:
+            data1 = yaml.safe_load(fp)
+        with open(file2, 'r') as fp:
+            data2 = yaml.safe_load(fp)
+    else:
+        return 'incorrect files format'
     return data1, data2
