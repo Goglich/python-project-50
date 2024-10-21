@@ -3,7 +3,7 @@ from gendiff.formater import formater
 from gendiff.formater import plain
 from gendiff.formater import json
 from gendiff import parser
-from tests.fixtures.fixture_paths import FILE1_JSON, FILE2_JSON, FILE1_YAML, FILE2_YAML, FILE3_JSON, FILE4_JSON
+from tests.fixtures.fixture_paths import FILE1_JSON, FILE2_JSON, FILE1_YAML, FILE2_YAML, FILE1_YML, FILE2_YML, FILE3_JSON, FILE4_JSON
 
 
 def excepted_result(path):
@@ -22,6 +22,13 @@ def test_get_diff_json():
 def test_get_diff_yaml():
     excepted = excepted_result('tests/fixtures/excepted_result.txt')
     data1, data2 = parser.files_parser(FILE1_YAML, FILE2_YAML)
+    diff = formater.make_stylish(gendiff.generate_diff(data1, data2))
+    assert diff == excepted
+
+
+def test_get_diff_yml():
+    excepted = excepted_result('tests/fixtures/excepted_result.txt')
+    data1, data2 = parser.files_parser(FILE1_YML, FILE2_YML)
     diff = formater.make_stylish(gendiff.generate_diff(data1, data2))
     assert diff == excepted
 
