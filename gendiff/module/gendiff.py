@@ -1,4 +1,4 @@
-def generate_diff(data1, data2):
+def generate_diff(data1: dict, data2: dict) -> list:
     list_diff = []
     set_keys = sorted(data1.keys() | data2.keys())
     for key in set_keys:
