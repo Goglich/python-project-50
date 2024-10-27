@@ -1,4 +1,4 @@
-def generate_diff(data1: dict, data2: dict) -> list:
+def get_diff(data1, data2):
     list_diff = []
     set_keys = sorted(data1.keys() | data2.keys())
     for key in set_keys:
@@ -19,7 +19,7 @@ def generate_diff(data1: dict, data2: dict) -> list:
         elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
             list_diff.append({
                 "key": key,
-                "value": generate_diff(data1[key], data2[key]),
+                "value": get_diff(data1[key], data2[key]),
                 "type": 'nested',
             })
             continue
