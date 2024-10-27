@@ -37,6 +37,7 @@ def test_get_diff_plain():
     diff = generate_diff(FILE3_JSON, FILE4_JSON, 'plain')
     assert diff == excepted
 
+
 def test_get_diff_format_json():
     excepted = excepted_result('tests/fixtures/excepted_result_json.txt')
     diff = generate_diff(FILE3_JSON, FILE4_JSON, 'json')
