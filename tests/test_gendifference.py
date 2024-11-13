@@ -48,5 +48,5 @@ def excepted_result(path):
      'tests/fixtures/excepted_result_json.txt')
 ])
 def test_generate_diff(path1, path2, style, expected_path):
-    expected =  excepted_result(expected_path)
+    expected = excepted_result(expected_path)
     assert generate_diff(path1, path2, style) == expected
