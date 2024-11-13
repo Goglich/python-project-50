@@ -13,5 +13,4 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
         return json.format(diff)
     elif format_name == 'stylish':
         return stylish.format(diff)
-    else:
-        print('Incorrect format.')
+
