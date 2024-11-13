@@ -1,42 +1,41 @@
 import itertools
 
 
-INDENT = 4
-SHIFT_LEFT = 2
 STEP = 1
+REPLACER = ' '
+SPACES_COUNT = 4
 
 
-def make_stylish(value, replacer=' ', spaces_count=4):
-    def iter_(current_value, depth):
+def get_list_lines(current_value, depth):
+    deep_indent_size = depth * SPACES_COUNT
+    left_shift = REPLACER * (deep_indent_size - 2)
+    current_indent = ((SPACES_COUNT * depth) - SPACES_COUNT) * REPLACER
+    lines = []
+    for i in current_value:
+        match i['type']:
+            case 'nested':
+                lines.append(f"{left_shift}  {i['key']}: "
+                             f"{get_list_lines(i['value'], depth + STEP)}")
+            case 'added':
+                lines.append(f"{left_shift}+ {i['key']}: "
+                             f"{to_str(i['value'], depth + STEP)}")
+            case 'removed':
+                lines.append(f"{left_shift}- {i['key']}: "
+                             f"{to_str(i['value'], depth + STEP)}")
+            case 'equal':
+                lines.append(f"{left_shift}  {i['key']}: "
+                             f"{to_str(i['value'], depth + STEP)}")
+            case 'updated':
+                lines.append(f"{left_shift}- {i['key']}: "
+                             f"{to_str(i['value1'], depth + STEP)}")
+                lines.append(f"{left_shift}+ {i['key']}: "
+                             f"{to_str(i['value2'], depth + STEP)}")
+    result = itertools.chain("{", lines, [current_indent + "}"])
+    return '\n'.join(result)
 
-        deep_indent_size = depth * spaces_count
-        left_shift = replacer * (deep_indent_size - 2)
-        current_indent = ((spaces_count * depth) - spaces_count) * replacer
-        lines = []
-        if isinstance(current_value, list):
-            for i in current_value:
-                match i['type']:
-                    case 'nested':
-                        lines.append(f"{left_shift}  {i['key']}: "
-                                     f"{iter_(i['value'], depth + STEP)}")
-                    case 'added':
-                        lines.append(f"{left_shift}+ {i['key']}: "
-                                     f"{to_str(i['value'], depth + STEP)}")
-                    case 'removed':
-                        lines.append(f"{left_shift}- {i['key']}: "
-                                     f"{to_str(i['value'], depth + STEP)}")
-                    case 'equal':
-                        lines.append(f"{left_shift}  {i['key']}: "
-                                     f"{to_str(i['value'], depth + STEP)}")
-                    case 'updated':
-                        lines.append(f"{left_shift}- {i['key']}: "
-                                     f"{to_str(i['value1'], depth + STEP)}")
-                        lines.append(f"{left_shift}+ {i['key']}: "
-                                     f"{to_str(i['value2'], depth + STEP)}")
-        result = itertools.chain("{", lines, [current_indent + "}"])
-        return '\n'.join(result)
 
-    return iter_(value, STEP)
+def format(data):
+    return get_list_lines(data, STEP)
 
 
 def to_str(value, depth=0, replacer=' ', spaces_count=4):

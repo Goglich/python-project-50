@@ -1,4 +1,4 @@
-def build_plain(data):
+def format(data):
     def iter_(current_value, path):
         lines = []
         for i in current_value:
@@ -23,7 +23,7 @@ def build_plain(data):
 def to_str(value):
     if isinstance(value, dict):
         return "[complex value]"
-    elif value is True or value is False:
+    elif isinstance(value, bool):
         return str(value).lower()
     elif value is None:
         return 'null'
