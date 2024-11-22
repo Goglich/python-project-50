@@ -3,7 +3,8 @@ from gendiff import cli
 
 
 def main():
-    print(generate_diff(cli.first_file, cli.second_file, cli.format))
+    first_file, second_file, format = cli.parse_args()
+    print(generate_diff(first_file, second_file, format))
 
 
 if __name__ == "__main__":

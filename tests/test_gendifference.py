@@ -9,7 +9,7 @@ def excepted_result(path):
         return result
 
 
-@pytest.mark.parametrize("path1, path2, style, expected", [
+@pytest.mark.parametrize("path1, path2, style, expected_path", [
     (fixture_paths.FILE1_JSON,
      fixture_paths.FILE2_JSON,
      'stylish',
